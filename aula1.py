@@ -18,11 +18,8 @@ def existe(lista, elem):
 		return True
 	return existe(lista[1:], elem)
 
-
 #Exercicio 1.4
 def concat(l1, l2):
-
-    
     if l1 == []:
         return l2
     if l2 == []:
@@ -50,7 +47,6 @@ def explode(lista):
     if lista == []:
         return []
     return lista[0] + explode(lista[1:]) 
-    
 
 #Exercicio 1.8
 def substitui(lista, original, novo):
@@ -62,64 +58,104 @@ def substitui(lista, original, novo):
     
 #Exercicio 1.9
 def junta_ordenado(lista1, lista2):
-    if lista1 == [] and lista2 != []:
+    if lista1 == []:
         return lista2
-    elif lista1 != [] and lista2 == []:
+    elif lista2 == []:
         return lista1
-    elif lista1 == [] and lista2 == []:
-        return []
     else:
         if lista1[0] < lista2[0]:
-            return [lista1[-1]] + [lista2[-1]] + junta_ordenado(lista1[:-1], lista2[:-1])
+            return [lista1[0]] + junta_ordenado(lista1[1:], lista2)
         else:
-            return [lista2[-1]] + [lista1[-1]] + junta_ordenado(lista1[:-1], lista2[:-1])
+            return [lista2[0]] + junta_ordenado(lista1, lista2[1:])
 
 #Exercicio 2.1
 def separar(lista):
-	pass
+    if lista == []:
+        return [], []
+    an, bn = lista[0]                     #ir buscar o primeiro e o segundo elemento do par
+    lista_a, lista_b = separar(lista[1:]) #ir ao par seguinte e retirar o primeiro e segundo elemento desse par
+    return [an] + lista_a, [bn] + lista_b #juntar os elementos 
 
 #Exercicio 2.2
 def remove_e_conta(lista, elem):
-	pass
+    if lista == []:
+        return [], 0
+    resto_lista, counter = remove_e_conta(lista[1:], elem)
+    if lista[0] == elem:
+        lista.pop(0)
+        return resto_lista, counter + 1
+    return [lista[0]] + resto_lista, counter 
 
 #Exercicio 3.1
 def cabeca(lista):
-	pass
+    if lista == []:
+        return None
+    return lista[0]
 
 #Exercicio 3.2
 def cauda(lista):
-	pass
+    if lista == [] or len(lista) == 1:
+        return None
+    return lista[-1]
 
 #Exercicio 3.3
 def juntar(l1, l2):
-    pass
+    if l1 == [] or l2 == []:
+        return []
+    if len(l1) != len(l2):
+        return None
+    return [(l1[0], l2[0])] + juntar(l1[1:], l2[1:])
 
 #Exercicio 3.4
 def menor(lista):
-	pass
+    if lista == []:
+        return None
+    menor_num = menor(lista[1:])
+    if menor_num ==  None or lista[0] < menor_num:
+        return lista[0]
+    else:
+        return menor_num    
 
 #Exercicio 3.6
 def max_min(lista):
-	pass
-
+    #! nao esta a funcionar bem
+    if lista == []:
+        return None
+    
+    par = max_min(lista[1:])
+    
+    if par == None:
+        return lista[0], lista[0]
+    
+    min_ = lista[0]
+    max_ = lista[0]
+    
+    if par[0] < min_:
+        min_ = par[0]
+    if par[1] > max_:
+        max = par[1]
+    
+    return min_, max_
+    
+    
 if __name__ == '__main__':
     lista = [1,2,2,1]
     
-    print("Exercicio 1.1: ", comprimento(lista))
-    print("Exercicio 1.2: ", soma(lista))
-    print("Exercicio 1.3: ", existe(lista, 2))
-    print("Exercicio 1.4: ", concat(lista, lista))
-    print("Exercicio 1.5: ", inverte(lista))
-    print("Exercicio 1.6: ", capicua(lista))
-    print("Exercicio 1.7: ", explode([lista,lista, lista]))
-    print("Exercicio 1.8: ", substitui(lista, 1, 2))
-    print("Exercicio 1.9: ", junta_ordenado(lista, lista))
+    print("Exercicio 1.1: ", comprimento([1,2,2,1]))
+    print("Exercicio 1.2: ", soma([1,2,2,1]))
+    print("Exercicio 1.3: ", existe([1,2,2,1], 2))
+    print("Exercicio 1.4: ", concat([1,2,2,1], [1,2,2,1]))
+    print("Exercicio 1.5: ", inverte([1,2,2,1]))
+    print("Exercicio 1.6: ", capicua([1,2,2,1]))
+    print("Exercicio 1.7: ", explode([[1,2,2,1], [1,2,2,1]]))
+    print("Exercicio 1.8: ", substitui([1,2,2,1], 1, 2))
+    print("Exercicio 1.9: ", junta_ordenado([1,2,3,4], [2,3,4,5]))
 
-    #print("Exercicio 2.1: ", separar(lista))
-    #print("Exercicio 2.2: ", remove_e_conta(lista, 2))
+    print("\nExercicio 2.1: ", separar([(1,2), (3,4)]))
+    print("Exercicio 2.2: ", remove_e_conta([1,2,2,1,3,4,5,3,2,2,1], 2))
 
-    #print("Exercicio 3.1: ", cabeça(lista))
-    #print("Exercicio 3.2: ", cauda(lista))
-    #print("Exercicio 3.3: ", juntar(lista, lista))
-    #print("Exercicio 3.4: ", menor(lista))
-    #print("Exercicio 3.6: ", max_min(lista))
+    print("\nExercicio 3.1: ", cabeca([1,2,2,1]))
+    print("Exercicio 3.2: ", cauda([1,2,3,4]))
+    print("Exercicio 3.3: ", juntar([1,2,3,4], [1,2,3,4]))
+    print("Exercicio 3.4: ", menor([1,2,2,1]))
+    print("Exercicio 3.6: ", max_min([1,2,3,2,1]))
