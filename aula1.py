@@ -1,3 +1,9 @@
+"""
+1.5,1.7,1.8,1.9,2.1,
+3.3,3.4,4.1-4.6, 4.9
+4.10, 5.2 a)
+"""
+
 #Exercicio 1.1
 def comprimento(lista):
     if lista == []:
@@ -118,29 +124,25 @@ def menor(lista):
 
 #Exercicio 3.6
 def max_min(lista):
-    #! nao esta a funcionar bem
     if lista == []:
         return None
     
-    par = max_min(lista[1:])
-    
-    if par == None:
+    par_min_max = max_min(lista[1:])
+   
+    if par_min_max == None:         #caso inicial, o min_ e o max_ sao o primeiro valor da lista
         return lista[0], lista[0]
     
     min_ = lista[0]
     max_ = lista[0]
     
-    if par[0] < min_:
-        min_ = par[0]
-    if par[1] > max_:
-        max = par[1]
-    
+    if par_min_max[0] < min_:
+        min_ = par_min_max[0]
+    if par_min_max[1] > max_:
+        max_ = par_min_max[1]
     return min_, max_
     
     
-if __name__ == '__main__':
-    lista = [1,2,2,1]
-    
+if __name__ == '__main__':    
     print("Exercicio 1.1: ", comprimento([1,2,2,1]))
     print("Exercicio 1.2: ", soma([1,2,2,1]))
     print("Exercicio 1.3: ", existe([1,2,2,1], 2))
