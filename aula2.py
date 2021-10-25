@@ -14,8 +14,9 @@ comparar_modulo = lambda x, y : True if (abs(x) < abs(y)) else False
 cart2pol = lambda x, y : (math.sqrt(x**2 + y**2), (math.atan2(y, x)))
 
 #Exercicio 4.5
-ex5 = None
-
+def ex5(f, g, h):
+    return lambda x, y, z: h(f(x,y), g(y, z)) 
+ 
 #Exercicio 4.6
 def quantificador_universal(lista, f):
     for i in lista:
