@@ -33,15 +33,25 @@ def quantificador_existencial(lista, f):
 
 #Exercicio 4.9
 def ordem(lista, f):
-    pass
+    if len(lista) == 1:
+        return lista[0]
+    m = ordem(lista[1:], f)
+    
+    return lista[0] if f(lista[0], m) else m
 
 #Exercicio 4.10
 def filtrar_ordem(lista, f):
-    pass
+    if len(lista) == 1:
+        return lista[0], []
+    m, l = filtrar_ordem(lista[1:], f)
+    return (lista[0], lista[1:]) if f(lista[0], m) else (m, [lista[0]] + l)
 
 #Exercicio 5.2
 def ordenar_seleccao(lista, ordem):
-    pass
+    if len(lista) == 1:
+        return lista
+    m, l = filtrar_ordem(lista, ordem)
+    return [m] + ordenar_seleccao(l, ordem)
 
 if __name__ == '__main__':
     print("Exercicio 4.1: ", impar(3))
